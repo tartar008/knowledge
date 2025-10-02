@@ -63,15 +63,18 @@ describe('login', () => {
     });
 
 
-    it('tc-02: Login ไม่สำเร็จ (username ผิด)', () => {
-
+    it.only('tc-02: Login ไม่สำเร็จ (username ผิด)', () => {
+        cy.login(DataLogin.username.nagative, DataLogin.password.positive)
         cy.location('pathname').should('eq', '/practice-test-login/');
         cy.url().should('not.include', '/logged-in-successfully');
+        loginPage.verifyLoginErrorUsername('Your username is invalid!')
+        // loginPage.loginError()
+
 
     });
 
-    it.only('tc-03', () => {
-        cy.login1(DataLogin.username.positive, DataLogin.password.nagative)
+    it('tc-03', () => {
+        cy.login(DataLogin.username.positive, DataLogin.password.nagative)
         loginPage.verifyLoginErrorPassword('Your password is invalid')
     })
 });
