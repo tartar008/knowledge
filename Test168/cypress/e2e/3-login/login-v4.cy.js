@@ -8,7 +8,7 @@ describe('login', () => {
         cy.visit(baseUrl)
     });
 
-    it('tc-01: Login สำเร็จ', () => {
+    it.only('tc-01: Login สำเร็จ', () => {
         // 1. เข้าไปที่หน้า login
         cy.location('pathname').should('eq', '/practice-test-login/');
 
@@ -20,7 +20,7 @@ describe('login', () => {
         cy.get('#submit')
             .should('be.visible')
 
-        cy.login1(DataLogin.username.positive, DataLogin.password.positive)
+        cy.login(DataLogin.username.positive, DataLogin.password.positive)
 
         cy.location().should((location) => {
             // ตรวจสอบ URL หลัก
@@ -38,7 +38,8 @@ describe('login', () => {
 
 
         // 6. ตรวจสอบเนื้อหาในหน้า logged-in
-        cy.get('h1').should('contain.text', 'Logged In Successfully');
+        // cy.get('h1').should('contain.text', 'Logged In Successfully');
+        loginPage.verifyLoginSuccessText();
         cy.get('p').should(
             'contain.text',
             'Congratulations student. You successfully logged in!'
@@ -63,12 +64,12 @@ describe('login', () => {
     });
 
 
-    it.only('tc-02: Login ไม่สำเร็จ (username ผิด)', () => {
+    it('tc-02: Login ไม่สำเร็จ (username ผิด)', () => {
         cy.login(DataLogin.username.nagative, DataLogin.password.positive)
         cy.location('pathname').should('eq', '/practice-test-login/');
         cy.url().should('not.include', '/logged-in-successfully');
         loginPage.verifyLoginErrorUsername('Your username is invalid!')
-        // loginPage.loginError()
+        loginPage.loginError()
 
 
     });
