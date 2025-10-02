@@ -1,0 +1,18 @@
+{
+    "baseUrl": {
+        "protocal": "https:",
+        "domain": "practicetestautomation.com",
+        "paths": {
+            "Login": "practice-test-login",
+            "home": "logged-in-successfully"
+        }
+    },
+    "username": {
+        "positive": "student",
+        "nagative": "incorrectUser"
+    },
+    "password": {
+        "positive": "Password123",
+        "nagative": "incorrectPassword"
+    }
+}
